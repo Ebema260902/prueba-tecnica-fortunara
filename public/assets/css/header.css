@@ -1,0 +1,78 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #1a1a1a; /* negro oscuro */
+  padding: 10px 20px;
+  font-family: 'Arial Black', Arial, sans-serif;
+  color: white;
+}
+
+.logo {
+  color: #cc0000; /* rojo similar */
+  font-weight: 900;
+  font-size: 1.5rem;
+  margin: 0;
+  user-select: none;
+}
+
+.header-center {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: #cc0000;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.icon-link {
+  color: white;
+  font-size: 1.2rem;
+  transition: color 0.3s;
+  text-decoration: none;
+}
+
+.icon-link:hover {
+  color: #cc0000;
+}
+
+.btn-reservar {
+  background-color: #cc0000;
+  color: white;
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 6px 15px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+}
+
+.btn-reservar:hover {
+  background-color: #ff3333;
+}
+
+.btn-reservar::after {
+  content: "→";
+  margin-left: 8px;
+  font-weight: bold;
+}
