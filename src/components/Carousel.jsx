@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion"; // Import useSpring
+import { motion, useMotionValue, useSpring } from "framer-motion";
 
-const Index = () => {
+const Carousel = () => {
   const images = [
     { src: "assets/images/021.jpg", label: "Bosque Privado" },
     { src: "assets/images/021.jpg", label: "Montaña" },
@@ -21,35 +21,82 @@ const Index = () => {
     setIsReady(true);
   }, []);
 
-  const radius = 360;
+  const [radius, setRadius] = useState(360);
   const angleStep = 360 / images.length;
   const maxVisibleCards = images.length;
   const DRAG_SENSITIVITY = 300;
 
-  // Use useSpring for dragX to get a smoother animation when it snaps back to 0
-  const dragX = useSpring(0, { stiffness: 300, damping: 30 }); // Adjust stiffness/damping for desired snap
+  
+  const dragX = useSpring(0, { stiffness: 300, damping: 30 });
   const offsetIndex = isDragging ? -dragX.get() / DRAG_SENSITIVITY : 0;
 
+
+  useEffect(() => {
+    const handleResize = () => {
+      const screenWidth = window.innerWidth;
+      if (screenWidth < 768) {
+        setRadius(180); 
+      } else if (screenWidth < 1024) {
+        setRadius(280); 
+      } else {
+        setRadius(360); 
+      }
+    };
+  
+    handleResize(); // inicial
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  
   const getPosition = (index) => {
+    const screenWidth = window.innerWidth;
+  
+ 
+    const isMobile = screenWidth < 769;
+    const isTablet = screenWidth >= 769 && screenWidth < 1024;
+    const isDesktop = screenWidth >= 1024;
+  
     const virtualIndex = activeIndex + offsetIndex;
-    const relativeIndex = ((index - virtualIndex + images.length) % images.length + images.length) % images.length;
+    const relativeIndex =
+      ((index - virtualIndex + images.length) % images.length + images.length) % images.length;
     const angle = -90 + angleStep * relativeIndex;
+  
     const baseY = radius * Math.sin((angle * Math.PI) / 180);
+    let xOffset = 0;
+
+    if (isMobile) {
+      xOffset = -50; // más a la izquierda
+    } else if (isTablet) {
+      xOffset = -20;
+    }
+
+    const x = radius * Math.cos((angle * Math.PI) / 180) + xOffset;
+
   
     const normalizedAngle = (angle + 360) % 360;
     const isRightSide = normalizedAngle >= 300 || normalizedAngle <= 60;
     const isLeftSide = normalizedAngle >= 120 && normalizedAngle <= 240;
   
-    // Aumentar verticalBoost para que las cartas laterales suban más (menor y)
-    const verticalBoost = (isRightSide || isLeftSide) ? 240 : 100; // Antes era 150, ahora 200 para subir más
+    // Valores adaptados por pantalla
+    let verticalBoost = 200;
+    let globalOffsetY = 40;
   
-    const globalOffsetY = 40;
-    const y = baseY - globalOffsetY - verticalBoost;
+    
+
+    if (isMobile) {
+      verticalBoost = 100;
+      globalOffsetY = -90;
+    } else if (isTablet) {
+      verticalBoost = 180;
+      globalOffsetY = 80;
+    }
   
-    const x = radius * Math.cos((angle * Math.PI) / 180);
+    const y = baseY - globalOffsetY - (isRightSide || isLeftSide ? verticalBoost : 50);
   
     return { x, y, angle, relativeIndex };
   };
+  
   
 
   const getCardRotation = (relativeIndex) => {
@@ -83,7 +130,7 @@ const Index = () => {
   };
 
   return (
-    <div>
+    <div className="scroll-container">
       <div className="container1">
         <div className="main-container">
           <div className="active-info">
@@ -143,6 +190,7 @@ const Index = () => {
                       style={{
                         pointerEvents: isVisible ? "auto" : "none",
                         touchAction: isVisible ? "auto" : "none",
+                        
                       }}
                     >
                       <img draggable={false} src={image.src} alt={image.label} />
@@ -170,25 +218,9 @@ const Index = () => {
         </div>
       </div>
 
-      <div className="galeria">
-        <div className="galeria-columna1">
-          <h2>Galería de Aventuras</h2>
-          <div className="galeria-button">
-            <p>Ver galería</p>
-            <img src="assets/images/arrow.png" alt="" />
-          </div>
-          <div>
-            <img className="imagen-columna1" src="assets/images/021.jpg" alt="" />
-            <img className="imagen-columna1" src="assets/images/021.jpg" alt="" />
-          </div>
-        </div>
-
-        <div className="galeria-columna2">
-          <img src="assets/images/021.jpg" alt="" />
-        </div>
-      </div>
+      
     </div>
   );
 };
 
-export default Index;
+export default Carousel;
