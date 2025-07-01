@@ -1,12 +1,39 @@
-# React + Vite
+# Prueba Técnica - Fortunara
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Hola, gracias por revisar mi propuesta. Esta prueba fue desarrollada como parte del proceso de selección para Fortunara.
 
-Currently, two official plugins are available:
+## 🎯 Descripción
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Este proyecto replica el componente visual mostrado en el video de referencia: una llanta central que gira al arrastrar, con tarjetas que orbitan alrededor de ella. El componente es interactivo y responsivo.
 
-## Expanding the ESLint configuration
+## 🛠️ Tecnologías utilizadas
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React + Vite
+- Framer Motion (para animaciones)
+- CSS personalizado con media queries
+- JavaScript (cálculo de posiciones y rotación)
+
+## 📱 Responsive Design
+
+El diseño está optimizado para distintos tamaños de pantalla, incluyendo:
+- Móviles pequeños (320–480px)
+- Móviles medianos (481–767px)
+- Tablets (768–991px)
+- Laptops (992–1536px)
+- Pantallas grandes (1537px en adelante)
+
+## ▶️ Cómo correr el proyecto
+
+1. Clonar el repositorio:
+
+   ```bash
+   git clone https://github.com/tu-usuario/nombre-del-repo.git
+
+2.  Instalar las dependencias (esto creará la carpeta node_modules):
+    
+    npm install
+
+3. Ejecutar el proyecto
+
+    npm run dev
+
