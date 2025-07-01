@@ -13,14 +13,14 @@ body {
   transform: translate(-50%, -50%);
   width: 100%;
   height: 100%;
-  overflow: hidden; /* 👈 evita cualquier scroll interno */
-  pointer-events: none; /* opcional: para que no bloquee scrolls del resto */
+  overflow: hidden; 
+  pointer-events: none; 
   z-index: 1;
 }
 
 .wheel-zone,
 .wheel-wrapper {
-  pointer-events: auto; /* 👈 habilita interacción solo con la rueda */
+  pointer-events: auto; 
 }
 
 .main-container {
@@ -30,7 +30,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh; /* ✅ se adapta a la altura de pantalla */
+  min-height: 100vh; 
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -337,9 +337,6 @@ body {
     font-size: 1rem;
   }
 }
-
-
-
 
 
 @media (max-width: 992px){

@@ -43,7 +43,7 @@ const Carousel = () => {
       }
     };
   
-    handleResize(); // inicial
+    handleResize(); 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -66,7 +66,7 @@ const Carousel = () => {
     let xOffset = 0;
 
     if (isMobile) {
-      xOffset = -50; // más a la izquierda
+      xOffset = -50; 
     } else if (isTablet) {
       xOffset = -20;
     }
@@ -77,13 +77,10 @@ const Carousel = () => {
     const normalizedAngle = (angle + 360) % 360;
     const isRightSide = normalizedAngle >= 300 || normalizedAngle <= 60;
     const isLeftSide = normalizedAngle >= 120 && normalizedAngle <= 240;
-  
-    // Valores adaptados por pantalla
+ 
     let verticalBoost = 200;
     let globalOffsetY = 40;
   
-    
-
     if (isMobile) {
       verticalBoost = 100;
       globalOffsetY = -90;
@@ -122,7 +119,6 @@ const Carousel = () => {
       setActiveIndex((prev) => (prev + 1) % images.length);
       setWheelRotation((prev) => prev - angleStep);
     }
-    // Instead of directly setting dragX to 0, let the useSpring animate it back
     dragX.set(0); 
     setIsDragging(false);
 
@@ -150,41 +146,39 @@ const Carousel = () => {
               {isReady &&
                 images.map((image, index) => {
                   const { x, y, angle, relativeIndex } = getPosition(index);
-                  const isCurrentActive = index === activeIndex; // Changed to activeIndex for direct state
+                  const isCurrentActive = index === activeIndex;
                   
                   const maxSide = Math.floor(maxVisibleCards / 2);
                   const isVisible =
                     relativeIndex <= maxSide ||
                     relativeIndex >= images.length - maxSide;
                   const cardRotation = getCardRotation(relativeIndex);
-                  // extraY will now be controlled by the `scale` animation and the position itself
                   const scaleValue = isCurrentActive ? 2.2 : 1; 
 
                   return (
                     <motion.div
-                      key={index} // Use index as key, visualActiveIndex causes re-renders
+                      key={index}
                       className={`card ${isCurrentActive ? "active" : ""}`}
                       initial={false}
                       animate={{
-                        x: x, // Animate x and y directly for smoother transitions
+                        x: x, 
                         y: y,
                         rotate: cardRotation,
                         scale: scaleValue,
                         opacity: isVisible ? 1 : 0,
-                        zIndex: isCurrentActive ? 9 : 1, // Keep zIndex for layering
+                        zIndex: isCurrentActive ? 9 : 1,
                         filter: isCurrentActive ? "brightness(1)" : "brightness(0.3)",
                       }}
                       transition={{
                         type: "spring",
                         damping: 20,
                         stiffness: 300,
-                        // Apply transition to all animated properties for consistency
                         x: { duration: isDragging ? 0 : 0.5, ease: "easeInOut" },
                         y: { duration: isDragging ? 0 : 0.5, ease: "easeInOut" },
                         rotate: { duration: isDragging ? 0 : 0.5, ease: "easeInOut" },
                         scale: { duration: isDragging ? 0 : 0.9, ease: "easeInOut" },
-                        opacity: { duration: 0.3, ease: "easeInOut" }, // Faster opacity transition
-                        zIndex: { delay: isDragging ? 0 : 0.2 }, // Delay zIndex change slightly
+                        opacity: { duration: 0.3, ease: "easeInOut" }, 
+                        zIndex: { delay: isDragging ? 0 : 0.2 }, 
                         filter: { duration: 0.3, ease: "easeInOut" },
                       }}
                       style={{
@@ -208,7 +202,7 @@ const Carousel = () => {
                   rotate: wheelRotation - offsetIndex * angleStep,
                 }}
                 transition={{
-                  rotate: { duration: 0.5, ease: "easeInOut" }, // Keep wheel rotation smooth
+                  rotate: { duration: 0.5, ease: "easeInOut" }, 
                 }}
                 onAnimationComplete={() => setVisualActiveIndex(activeIndex)}
                 draggable={false}

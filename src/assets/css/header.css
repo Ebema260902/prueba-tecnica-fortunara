@@ -83,7 +83,7 @@
   font-weight: bold;
 }
 
-/* Botón hamburguesa (oculto por defecto) */
+/* Botón hamburguesa*/
 .hamburger {
   display: none;
   flex-direction: column;
@@ -107,7 +107,7 @@
   transform-origin: 1px;
 }
 
-/* Animación al abrir/cerrar */
+/* Animación abrir/cerrar */
 .hamburger.open span:nth-child(1) {
   transform: rotate(45deg);
 }
@@ -121,7 +121,10 @@
   transform: rotate(-45deg);
 }
 
-/* --- MOBILE --- */
+
+
+
+/* Mobile */
 @media (max-width: 768px) {
   .header {
     padding: 10px 15px;
@@ -131,12 +134,10 @@
     font-size: 1.4rem;
   }
 
-  /* Mostrar botón hamburguesa */
   .hamburger {
     display: flex;
   }
 
-  /* Menú lateral derecho */
   .header-center {
     position: fixed;
     top: 0;
